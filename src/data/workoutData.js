@@ -1,6 +1,5 @@
 export const WORKOUT_DATA = {
-    "template": "IA_TOON_PROTOCOL",
-    "version": "2.0",
+    "template": "IA_TOON_PROTOCOL_AESTHETIC_REAL_WEEK",
     "athlete": {
         "name": "Joao Vitor Lima",
         "age": 24,
@@ -9,7 +8,6 @@ export const WORKOUT_DATA = {
         "team": "Team Ironwarg",
         "main_goal": "Priorizar desenvolvimento de PEITO e OMBROS + recomposição corporal"
     },
-
     "training_split": {
         "frequency": "4x/semana (Upper/Lower)",
         "weekly_structure": ["A1", "B1", "OFF", "A2", "B2", "OFF", "OFF"]
@@ -17,34 +15,33 @@ export const WORKOUT_DATA = {
 
     "workouts": {
         "A1_Upper1": [
-            "Supino reto livre – 3×4-6 (1-2 RIR todas)",
-            "Crucifixo máquina – 3×8-10 (falha técnica todas)",
-            "Desenvolvimento máquina ou livre – 3×7-10 (falha técnica todas)",
-            "Elevação lateral polia – 3×8-10 (falha total na última)",
-            "Remada curvada – 2×6-8 (explosivo, upper back)",
-            "Puxador frente triângulo – 2×7-10 (falha técnica)",
-            "Tríceps barrinha polia – 3×8-10 (falha total na última)",
-            "Rosca direta polia – 3×8-10 (falha total na última)"
+            "Supino reto barra livre – 3×5-7 (1-2 RIR todas → foco técnica perfeita e progressão de carga)",
+            "Supino inclinado 30-40° halteres – 3×8-10 (0 RIR na última + 1–2 partials no stretch)",
+            "Crucifixo inclinado máquina ou polia baixa – 3×10-12 (falha técnica + lengthened focus)",
+            "Desenvolvimento militar sentado (smith ou máquina) – 3×7-10 (0 RIR na última)",
+            "Elevação lateral polia unilateral (cabo na mão oposta) – 3×10-12 + 6-8 partials finais",
+            "Face pull ou reverse pec deck (rear delts) – 3×12-15 (0 RIR + contração 2 seg)",
+            "Remada curvada – 2×6-8",
+            "Pulldown pronado (lats) – 2×8-12 (0 RIR na última)",
+            "Tríceps barrinha polia – 3×10-12 (falha total na última)",
+            "Rosca direta polia – 3×10-12 (falha total na última)"
         ],
-
         "B1_Lower1": [
-            "Agachamento livre – 1×4-6 (1-2 RIR)",
-            "Leg press – 2×5-9 (falha técnica)",
-            "Cadeira extensora – 2×5-9 (falha total; unilateral se necessário)",
-            "Mesa flexora – 2×8-10 (falha técnica)"
+            "Agachamento livre – 3×8-10",
+            "Leg press pés altos – there 3×10-12 (falha técnica + 5-8 partials finais)",
+            "Cadeira extensora (full ROM + pausa no stretch) – 3×12-15 (0 RIR + 5 partials)",
+            "Mesa flexora deitado – 3×10-12 (0 RIR na última)"
         ],
-
         "A2_Upper2": [
-            "Supino inclinado smith – 3×5-9 (falha técnica 1ª, falha total 2ª e 3ª)",
-            "Crucifixo máquina – 3×5-9 (falha técnica 1ª, falha total 2ª e 3ª)",
-            "Desenvolvimento smith – 3×5-9 (falha técnica 1ª, falha total 2ª e 3ª)",
-            "Elevação lateral polia ou halter – 3×8-10 (falha total na última)",
-            "Remada apoio de peito (upper back) – 2×5-9 (falha técnica 1ª, total 2ª)",
-            "Puxador frente triângulo – 2×5-9 (falha técnica 1ª, total 2ª)",
-            "Tríceps francês polia – 2×8-10 (falha total na última)",
-            "Rosca bayesian – 2×8-10 (falha total na última)"
+            "Supino inclinado smith ou máquina – 3×8-12 → última série Myo-Reps (falha + 3-5 respirações × 4-6 mini-sets)",
+            "Crucifixo máquina– 3×10-15 (0 RIR)",
+            "Desenvolvimento halteres sentado – 3×10-12 + 1 rest-pause set na última",
+            "Elevação lateral halter (lean-away) – 4×12-15 (última full failure + partials 20+)",
+            "Rear delt fly máquina ou face pull – 3×15-20",
+            "Remada unilateral polia – 3×10-12/perna",
+            "Tríceps testa polia - 3×12-15 cada (ou giant set)",
+            "Rosca bayesian cabo – 3×12-15 cada (ou giant set)"
         ],
-
         "B2_Lower2": [
             "Levantamento terra – 1×2-4 (80-95% 1RM – NUNCA falhar)",
             "RDL – 2×6-8 (1-2 RIR)",
@@ -54,40 +51,13 @@ export const WORKOUT_DATA = {
             "Cadeira abdutora – 2×8-10 (falha total na última)"
         ]
     },
-
     "extras": {
-        "abdomen_panturrilha": "4-6 séries de cada por semana (pode colocar em lower ou OFF)",
-        "cardio": "4x/semana → 45 min LISS esteira (vel. 5-6 km/h + inclinação 3-4)",
-        "cardio_refeicao_livre": "+10 min no dia da ref livre + dia seguinte"
-    },
-
-    "nutrition": {
-        "daily_kcal": 2300,
-        "macros": { "prot": 170, "carb": 253, "fat": 45 },
-        "meals": [
-            "Ref1 → 4 ovos inteiros mexidos + 2 fat pão forma + 20g muçarela + 100g abacaxi",
-            "Ref2 → 180g arroz branco + 150g feijão + 150g frango grelhado + 100g abacaxi + salada",
-            "Ref3 → 160g iogurte natural desnatado + 40g whey + 30g aveia + 100g maçã",
-            "Ref4 → igual Ref2"
-        ],
-        "water": "Mínimo 4 L/dia",
-        "cheat_meal": "1x/semana até ~1500 kcal → retirar 2 refeições do dia (preferência janta) + compensar cardio e água",
-        "cheat_rule": "Só liberada com 100% de adesão ao protocolo"
+        "cardio": "4–5×/week → 45-60 min LISS walking (can be done at home or outdoors on OFF days – especially Mon/Wed/Sun)",
+        "optional delt finisher (A1 & A2 days)": "100 banded lateral/front/rear raises in superset for insane shoulder pump",
+        "note": "Friday & Saturday are back-to-back (Upper → Lower). Recovery is excellent because lower volume is moderate and cardio is only walking."
     },
 
     "progression_rules": {
-        "load_progression": "Anotar TODAS as cargas e reps",
-        "never_fail": ["Agachamento livre", "Levantamento terra"],
-        "rir_guide": "Séries de 4-6 → cargas mais pesadas | 8-10 → cargas mais leves que 5-9",
-        "warmup": "2-4 sets leves antes de cada composto"
-    },
-
-    "design": {
-        "background": "preto com detalhes vermelho escuro Ironwarg",
-        "logo_position": "top_center",
-        "athlete_photo": "esquerda superior",
-        "font_primary": "Bebas Neue bold (branco e vermelho)",
-        "highlight_color": "#B81D24",
-        "sections_divider": "linha vermelha com logo pequeno no meio"
+        "warmup": "2-4 sets of 6-12 reps",
     }
 };
