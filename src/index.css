@@ -1,36 +1,39 @@
-:root {
-  --color-bg: #050505;
-  --color-surface: #121212;
-  --color-surface-light: #1E1E1E;
-  --color-primary: #B81D24;
-  --color-primary-hover: #d9232b;
-  --color-primary-glow: rgba(184, 29, 36, 0.5);
-  --color-text: #FFFFFF;
-  --color-text-muted: #A0A0A0;
-  --color-border: #2A2A2A;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #09090b;
+  /* Zinc 950 - slightly lighter/richer black */
+  --color-surface: #18181b;
+  /* Zinc 900 */
+  --color-surface-light: #27272a;
+  /* Zinc 800 */
+  --color-primary: #e11d48;
+  /* Rose 600 - more vibrant/modern red */
+  --color-primary-hover: #be123c;
+  /* Rose 700 */
+  --color-primary-glow: rgba(225, 29, 72, 0.4);
+  --color-text: #fafafa;
+  /* Zinc 50 */
+  --color-text-muted: #a1a1aa;
+  /* Zinc 400 */
+  --color-border: #27272a;
+  /* Zinc 800 */
 
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Bebas Neue', sans-serif;
 
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 15px var(--color-primary-glow);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px var(--color-primary-glow);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-}
-
+/* Base styles */
 body {
   background-color: var(--color-bg);
+  /* Subtle, cleaner gradient */
   background-image:
-    radial-gradient(circle at 50% 0%, #1a0505 0%, transparent 50%),
-    radial-gradient(circle at 80% 100%, #1a0505 0%, transparent 50%);
+    radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.15) 0%, transparent 60%);
   background-attachment: fixed;
   color: var(--color-text);
   font-family: var(--font-primary);
@@ -45,125 +48,93 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
-  letter-spacing: 1px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-button {
-  cursor: pointer;
-  font-family: inherit;
-  user-select: none;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-surface-light);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
+/* Custom Utilities */
+@utility btn-primary {
   background: var(--color-primary);
-}
-
-.container {
-  max-width: 800px;
-  /* Tighter container for mobile focus */
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #8a1218 100%);
   color: white;
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  /* Pill shape for modern feel */
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   text-transform: uppercase;
   font-family: var(--font-display);
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(225, 29, 72, 0.4);
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
-  filter: brightness(1.1);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-outline {
-  background-color: rgba(255, 255, 255, 0.03);
-  color: var(--color-text);
+@utility btn-outline {
+  background-color: transparent;
+  color: var(--color-text-muted);
   border: 1px solid var(--color-border);
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
   font-weight: 500;
   transition: all 0.2s ease;
+  font-size: 0.9rem;
+
+  &:hover {
+    border-color: var(--color-text);
+    color: var(--color-text);
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
-.btn-outline:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  background-color: rgba(184, 29, 36, 0.1);
-}
-
-.btn-outline:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  border-color: var(--color-border);
-  color: var(--color-text-muted);
-}
-
-.card {
-  background: rgba(18, 18, 18, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+@utility card {
+  background: rgba(24, 24, 27, 0.6);
+  /* Zinc 900 with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
 }
 
-.input-field {
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--color-border);
+@utility input-field {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
   color: var(--color-text);
-  padding: 0.75rem;
-  border-radius: 8px;
+  padding: 0.5rem 0;
+  border-radius: 0;
   width: 100%;
   font-family: var(--font-primary);
   transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: transparent;
+  }
+
+  &::placeholder {
+    color: #52525b;
+    /* Zinc 600 */
+  }
 }
 
-.input-field:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  background-color: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 0 2px rgba(184, 29, 36, 0.2);
-}
-
-.input-field::placeholder {
-  color: #555;
-}
-
-/* Utility for glass effect */
-.glass {
+@utility glass {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);

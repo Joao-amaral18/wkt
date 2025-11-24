@@ -10,77 +10,22 @@ const RestOverlay = ({ isVisible, timeLeft, onAdd30s, onSkip }) => {
     };
 
     return (
-        <div style={{
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '100vh',
-            backgroundColor: 'rgba(0, 0, 0, 0.95)',
-            zIndex: 100,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            backdropFilter: 'blur(20px)'
-        }}>
-            <div style={{
-                marginBottom: '3rem',
-                textAlign: 'center',
-                position: 'relative'
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '300px',
-                    height: '300px',
-                    background: 'radial-gradient(circle, rgba(184, 29, 36, 0.2) 0%, transparent 70%)',
-                    zIndex: -1,
-                    borderRadius: '50%'
-                }} />
+        <div className="fixed bottom-0 left-0 right-0 h-screen bg-black/95 z-[100] flex flex-col items-center justify-center text-white backdrop-blur-xl">
+            <div className="mb-12 text-center relative">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(184,29,36,0.2)_0%,transparent_70%)] -z-10 rounded-full" />
 
-                <h2 style={{
-                    fontSize: '1.5rem',
-                    color: 'var(--color-text-muted)',
-                    marginBottom: '1rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '4px',
-                    fontWeight: '500'
-                }}>
+                <h2 className="text-2xl text-[var(--color-text-muted)] mb-4 uppercase tracking-[4px] font-medium">
                     Resting
                 </h2>
-                <div style={{
-                    fontSize: '8rem',
-                    fontWeight: 'bold',
-                    fontVariantNumeric: 'tabular-nums',
-                    lineHeight: 1,
-                    color: 'white',
-                    textShadow: '0 0 30px rgba(184, 29, 36, 0.5)',
-                    fontFamily: 'var(--font-display)'
-                }}>
+                <div className="text-[8rem] font-bold tabular-nums leading-none text-white drop-shadow-[0_0_30px_rgba(184,29,36,0.5)] font-[family-name:var(--font-display)]">
                     {formatTime(timeLeft)}
                 </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <div className="flex gap-6">
                 <button
                     onClick={onAdd30s}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '1rem 2rem',
-                        backgroundColor: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        borderRadius: '50px',
-                        color: 'white',
-                        fontSize: '1.1rem',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s'
-                    }}
+                    className="flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-full text-white text-lg hover:bg-white/10 transition-colors cursor-pointer"
                 >
                     <Plus size={24} />
                     +30s
@@ -88,16 +33,7 @@ const RestOverlay = ({ isVisible, timeLeft, onAdd30s, onSkip }) => {
 
                 <button
                     onClick={onSkip}
-                    className="btn-primary"
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '1rem 2rem',
-                        borderRadius: '50px',
-                        fontSize: '1.1rem',
-                        boxShadow: '0 0 20px rgba(184, 29, 36, 0.4)'
-                    }}
+                    className="btn-primary flex items-center gap-2 px-8 py-4 rounded-full text-lg shadow-[0_0_20px_rgba(184,29,36,0.4)]"
                 >
                     Skip Rest
                     <X size={24} />

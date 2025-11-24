@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ExerciseCard from './ExerciseCard';
 import RestOverlay from './RestOverlay';
-import { CheckCircle, Trophy, ArrowLeft } from 'lucide-react';
+import { Trophy, ArrowLeft, Flame } from 'lucide-react';
 
 const WorkoutView = ({ workoutId, data }) => {
     const exercises = data.workouts[workoutId];
@@ -52,52 +52,28 @@ const WorkoutView = ({ workoutId, data }) => {
 
     if (showSummary) {
         return (
-            <div style={{
-                textAlign: 'center',
-                padding: '2rem',
-                minHeight: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                background: 'radial-gradient(circle at center, #1a0505 0%, #000000 100%)'
-            }}>
-                <div style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    backdropFilter: 'blur(20px)',
-                    padding: '3rem 2rem',
-                    borderRadius: '24px',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    width: '100%',
-                    maxWidth: '400px',
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
-                }}>
-                    <Trophy size={80} color="var(--color-primary)" style={{ marginBottom: '1.5rem', filter: 'drop-shadow(0 0 10px rgba(184, 29, 36, 0.5))' }} />
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', lineHeight: 1.1 }}>Workout<br />Complete</h2>
-                    <p style={{ color: 'var(--color-text-muted)', marginBottom: '2.5rem', fontSize: '1.1rem' }}>
+            <div className="text-center p-8 min-h-screen flex flex-col justify-center items-center bg-[radial-gradient(circle_at_center,rgba(225,29,72,0.15)_0%,transparent_70%)]">
+                <div className="bg-zinc-900/50 backdrop-blur-xl p-12 rounded-3xl border border-white/5 w-full max-w-[400px]">
+                    <Trophy size={64} className="text-[var(--color-primary)] mb-6 mx-auto drop-shadow-[0_0_15px_rgba(225,29,72,0.4)]" />
+                    <h2 className="text-4xl mb-2 leading-tight">Workout<br />Complete</h2>
+                    <p className="text-[var(--color-text-muted)] mb-10 text-lg">
                         {title} session crushed.
                     </p>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        gap: '1rem',
-                        marginBottom: '2.5rem'
-                    }}>
-                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '12px' }}>
-                            <div style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>Duration</div>
-                            <div style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)' }}>45m</div>
+                    <div className="grid grid-cols-2 gap-4 mb-10">
+                        <div className="bg-white/5 p-4 rounded-2xl">
+                            <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider mb-1">Duration</div>
+                            <div className="text-2xl font-[family-name:var(--font-display)]">45m</div>
                         </div>
-                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '12px' }}>
-                            <div style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>Volume</div>
-                            <div style={{ fontSize: '1.5rem', fontFamily: 'var(--font-display)' }}>4.2t</div>
+                        <div className="bg-white/5 p-4 rounded-2xl">
+                            <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider mb-1">Volume</div>
+                            <div className="text-2xl font-[family-name:var(--font-display)]">4.2t</div>
                         </div>
                     </div>
 
                     <button
                         onClick={() => window.location.reload()}
-                        className="btn-primary"
-                        style={{ width: '100%' }}
+                        className="btn-primary w-full"
                     >
                         Back to Home
                     </button>
@@ -107,68 +83,46 @@ const WorkoutView = ({ workoutId, data }) => {
     }
 
     return (
-        <div style={{ paddingBottom: '8rem' }}>
+        <div className="pb-32">
             {/* Progress Bar */}
-            <div style={{
-                position: 'fixed',
-                top: '0',
-                left: 0,
-                right: 0,
-                height: '4px',
-                background: 'rgba(255,255,255,0.05)',
-                zIndex: 40,
-                backdropFilter: 'blur(4px)'
-            }}>
-                <div style={{
-                    height: '100%',
-                    width: `${progress}%`,
-                    background: 'linear-gradient(90deg, var(--color-primary) 0%, #ff4d55 100%)',
-                    boxShadow: '0 0 10px rgba(184, 29, 36, 0.5)',
-                    transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                }} />
+            <div className="fixed top-0 left-0 right-0 h-1 bg-zinc-900 z-40">
+                <div
+                    className="h-full bg-[var(--color-primary)] shadow-[0_0_10px_rgba(225,29,72,0.5)] transition-[width] duration-500 ease-out"
+                    style={{ width: `${progress}%` }}
+                />
             </div>
 
-            <header style={{ marginBottom: '3rem', marginTop: '2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                    <button className="btn-outline" style={{ padding: '0.5rem', borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.05)' }}>
+            <header className="mb-10 mt-6">
+                <div className="flex items-center gap-4 mb-6">
+                    <button className="p-2 rounded-full hover:bg-white/5 transition-colors text-[var(--color-text-muted)] hover:text-white">
                         <ArrowLeft size={20} />
                     </button>
-                    <span style={{ color: 'var(--color-primary)', fontWeight: '600', letterSpacing: '1px', fontSize: '0.9rem' }}>
+                    <span className="text-[var(--color-primary)] font-medium tracking-wider text-xs uppercase bg-[rgba(225,29,72,0.1)] px-3 py-1 rounded-full">
                         {data.training_split.frequency.split(' ')[0]}
                     </span>
                 </div>
-                <h2 style={{
-                    fontSize: '3rem',
-                    color: 'white',
-                    marginBottom: '0.5rem',
-                    lineHeight: '0.9',
-                    textShadow: '0 2px 10px rgba(0,0,0,0.5)'
-                }}>
+                <h2 className="text-4xl text-white mb-2 leading-none tracking-tight">
                     {title}
                 </h2>
-                <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
+                <p className="text-[var(--color-text-muted)] text-lg">
                     {data.training_split.frequency}
                 </p>
             </header>
 
-            <section style={{ marginBottom: '2rem' }}>
-                <div style={{
-                    background: 'linear-gradient(145deg, rgba(184, 29, 36, 0.1) 0%, rgba(0,0,0,0) 100%)',
-                    border: '1px solid rgba(184, 29, 36, 0.2)',
-                    padding: '1.5rem',
-                    borderRadius: '16px',
-                    marginBottom: '3rem',
-                    backdropFilter: 'blur(10px)'
-                }}>
-                    <h3 style={{ color: 'var(--color-primary)', marginBottom: '0.75rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ fontSize: '1.5rem' }}>🔥</span> Warmup Protocol
-                    </h3>
-                    <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.8)' }}>
-                        {data.progression_rules.warmup}
-                    </p>
+            <section className="mb-8">
+                <div className="flex items-start gap-4 mb-12 p-4 rounded-2xl bg-white/5 border border-white/5">
+                    <div className="p-2 bg-[rgba(225,29,72,0.1)] rounded-full text-[var(--color-primary)]">
+                        <Flame size={20} />
+                    </div>
+                    <div>
+                        <h3 className="text-white font-medium mb-1">Warmup Protocol</h3>
+                        <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
+                            {data.progression_rules.warmup}
+                        </p>
+                    </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className="flex flex-col">
                     {exercises.map((exerciseString, index) => (
                         <ExerciseCard
                             key={`${workoutId}-${index}`}
@@ -182,22 +136,10 @@ const WorkoutView = ({ workoutId, data }) => {
                 </div>
 
                 {completedExercises.length === exercises.length && (
-                    <div style={{
-                        position: 'fixed',
-                        bottom: '2rem',
-                        left: '1rem',
-                        right: '1rem',
-                        zIndex: 50
-                    }}>
+                    <div className="fixed bottom-8 left-4 right-4 z-50 max-w-[800px] mx-auto">
                         <button
-                            className="btn-primary"
+                            className="btn-primary w-full py-4 text-xl shadow-[0_10px_40px_rgba(225,29,72,0.3)]"
                             onClick={handleFinishWorkout}
-                            style={{
-                                width: '100%',
-                                padding: '1.2rem',
-                                fontSize: '1.4rem',
-                                boxShadow: '0 10px 30px rgba(184, 29, 36, 0.4)'
-                            }}
                         >
                             Finish Workout
                         </button>

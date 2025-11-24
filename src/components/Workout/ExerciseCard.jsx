@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle, Save, History } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import { supabase, getExerciseHistory } from '../../lib/supabase';
 
 const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComplete }) => {
@@ -103,171 +103,89 @@ const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComple
     };
 
     return (
-        <div className={`card ${isActive ? 'active-card' : ''}`} style={{
-            opacity: isActive ? 1 : 0.5,
-            transform: isActive ? 'scale(1.02)' : 'scale(1)',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            borderLeft: isActive ? '4px solid var(--color-primary)' : '1px solid rgba(255,255,255,0.05)',
-            pointerEvents: isActive ? 'auto' : 'none',
-            marginBottom: '1.5rem',
-            background: isActive ? 'linear-gradient(145deg, rgba(30,30,30,0.9) 0%, rgba(20,20,20,0.95) 100%)' : 'rgba(18,18,18,0.6)',
-            boxShadow: isActive ? '0 8px 32px rgba(0,0,0,0.5)' : 'none'
-        }}>
-            <div style={{ marginBottom: '1.5rem' }}>
-                <h4 style={{
-                    fontSize: '1.4rem',
-                    marginBottom: '0.5rem',
-                    color: isActive ? 'white' : 'var(--color-text-muted)',
-                    transition: 'color 0.3s'
-                }}>
-                    {name}
-                </h4>
-                <div style={{ display: 'flex', gap: '1rem', fontSize: '1rem', color: 'var(--color-text-muted)' }}>
-                    <span style={{
-                        color: 'var(--color-primary)',
-                        fontWeight: 'bold',
-                        background: 'rgba(184, 29, 36, 0.1)',
-                        padding: '0.2rem 0.6rem',
-                        borderRadius: '4px',
-                        fontFamily: 'var(--font-display)',
-                        letterSpacing: '1px'
-                    }}>
+        <div className={`mb-8 transition-all duration-500 ease-out ${isActive
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-40 translate-y-2 pointer-events-none grayscale'
+            }`}>
+            <div className="mb-4 pl-2">
+                <div className="flex items-baseline justify-between mb-1">
+                    <h4 className="text-xl font-medium text-white tracking-tight">
+                        {name}
+                    </h4>
+                    <span className="text-sm font-medium text-[var(--color-primary)] bg-[rgba(225,29,72,0.1)] px-2 py-0.5 rounded-full">
                         {setsReps}
                     </span>
                 </div>
                 {cleanNotes && (
-                    <div style={{
-                        fontSize: '0.9rem',
-                        color: 'var(--color-text-muted)',
-                        marginTop: '0.75rem',
-                        fontStyle: 'italic',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem'
-                    }}>
-                        <span style={{ opacity: 0.7 }}>💡</span> {cleanNotes}
+                    <div className="text-sm text-[var(--color-text-muted)] flex items-center gap-2">
+                        {cleanNotes}
                     </div>
                 )}
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="flex flex-col gap-3">
                 {sets.map((set, i) => (
-                    <div key={i} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.75rem',
-                        opacity: set.isCompleted ? 0.5 : 1,
-                        transition: 'opacity 0.3s'
-                    }}>
-                        <span style={{
-                            width: '24px',
-                            height: '24px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: 'var(--color-text-muted)',
-                            fontSize: '0.9rem',
-                            fontWeight: 'bold',
-                            background: 'rgba(255,255,255,0.05)',
-                            borderRadius: '50%'
-                        }}>
+                    <div key={i} className={`group flex items-center gap-4 p-3 rounded-xl transition-all duration-300 ${set.isCompleted
+                            ? 'bg-white/5'
+                            : 'bg-[var(--color-surface)] border border-[var(--color-border)]'
+                        }`}>
+                        <span className={`w-6 h-6 flex items-center justify-center text-xs font-bold rounded-full transition-colors ${set.isCompleted ? 'text-green-500 bg-green-500/10' : 'text-[var(--color-text-muted)] bg-white/5'
+                            }`}>
                             {i + 1}
                         </span>
 
                         {/* Weight Input */}
-                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ position: 'relative' }}>
+                        <div className="flex-1 flex flex-col">
+                            <div className="relative">
                                 <input
                                     type="number"
                                     inputMode="decimal"
                                     step="0.5"
-                                    placeholder={set.prevWeight ? `${set.prevWeight}` : '-'}
-                                    className="input-field"
+                                    placeholder={set.prevWeight || '-'}
+                                    className={`w-full bg-transparent border-none p-0 text-lg font-medium focus:ring-0 placeholder:text-[var(--color-text-muted)]/30 ${(set.prevWeight && parseFloat(set.weight) > set.prevWeight)
+                                            ? 'text-green-400'
+                                            : 'text-white'
+                                        }`}
                                     value={set.weight}
                                     onChange={(e) => handleWeightChange(i, e.target.value)}
                                     disabled={set.isCompleted}
-                                    style={{
-                                        paddingRight: '1.5rem',
-                                        fontSize: '1.1rem',
-                                        borderColor: (set.prevWeight && parseFloat(set.weight) > set.prevWeight) ? '#4ade80' : 'var(--color-border)',
-                                        color: (set.prevWeight && parseFloat(set.weight) > set.prevWeight) ? '#4ade80' : 'white',
-                                        fontWeight: '500'
-                                    }}
                                 />
-                                <span style={{
-                                    position: 'absolute',
-                                    right: '10px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    color: 'var(--color-text-muted)',
-                                    fontSize: '0.75rem',
-                                    pointerEvents: 'none'
-                                }}>
+                                <span className="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider pointer-events-none">
                                     kg
                                 </span>
                             </div>
-                            {set.prevWeight && (
-                                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '4px', paddingLeft: '4px' }}>
-                                    Last: {set.prevWeight}
-                                </span>
-                            )}
                         </div>
 
                         {/* Reps Input */}
-                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ position: 'relative' }}>
+                        <div className="flex-1 flex flex-col">
+                            <div className="relative">
                                 <input
                                     type="number"
                                     inputMode="numeric"
-                                    placeholder={set.prevReps ? `${set.prevReps}` : '-'}
-                                    className="input-field"
+                                    placeholder={set.prevReps || '-'}
+                                    className={`w-full bg-transparent border-none p-0 text-lg font-medium focus:ring-0 placeholder:text-[var(--color-text-muted)]/30 ${(set.prevReps && parseInt(set.reps) > set.prevReps)
+                                            ? 'text-green-400'
+                                            : 'text-white'
+                                        }`}
                                     value={set.reps || ''}
                                     onChange={(e) => handleRepsChange(i, e.target.value)}
                                     disabled={set.isCompleted}
-                                    style={{
-                                        paddingRight: '1.5rem',
-                                        fontSize: '1.1rem',
-                                        borderColor: (set.prevReps && parseInt(set.reps) > set.prevReps) ? '#4ade80' : 'var(--color-border)',
-                                        color: (set.prevReps && parseInt(set.reps) > set.prevReps) ? '#4ade80' : 'white',
-                                        fontWeight: '500'
-                                    }}
                                 />
-                                <span style={{
-                                    position: 'absolute',
-                                    right: '10px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    color: 'var(--color-text-muted)',
-                                    fontSize: '0.75rem',
-                                    pointerEvents: 'none'
-                                }}>
+                                <span className="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider pointer-events-none">
                                     reps
                                 </span>
                             </div>
-                            {set.prevReps && (
-                                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '4px', paddingLeft: '4px' }}>
-                                    Last: {set.prevReps}
-                                </span>
-                            )}
                         </div>
 
                         <button
-                            className="btn-outline"
+                            className={`w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 ${set.isCompleted
+                                    ? 'bg-green-500 text-white shadow-[0_0_15px_rgba(34,197,94,0.4)]'
+                                    : 'bg-white/5 text-[var(--color-text-muted)] hover:bg-white/10 hover:text-white'
+                                }`}
                             onClick={() => handleCheckSet(i)}
                             disabled={set.isCompleted || !set.weight || !set.reps}
-                            style={{
-                                padding: '0.8rem',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                backgroundColor: set.isCompleted ? 'var(--color-primary)' : 'rgba(255,255,255,0.05)',
-                                borderColor: set.isCompleted ? 'var(--color-primary)' : 'transparent',
-                                color: set.isCompleted ? 'white' : 'var(--color-text-muted)',
-                                borderRadius: '8px',
-                                transition: 'all 0.2s'
-                            }}
                         >
-                            <CheckCircle size={24} />
+                            <CheckCircle size={20} className={set.isCompleted ? 'fill-current' : ''} />
                         </button>
                     </div>
                 ))}

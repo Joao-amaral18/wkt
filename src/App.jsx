@@ -11,25 +11,13 @@ function App() {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="app-container" style={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
+    <div className="flex min-h-screen relative">
       {/* Mobile Header */}
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        padding: '1rem',
-        background: 'var(--color-bg)',
-        zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        borderBottom: '1px solid var(--color-border)',
-        height: '60px'
-      }} className="mobile-header lg:hidden">
-        <button onClick={toggleSidebar} style={{ background: 'none', border: 'none', color: 'white' }}>
+      <div className="fixed top-0 left-0 right-0 p-4 bg-[var(--color-bg)] z-50 flex items-center border-b border-[var(--color-border)] h-[60px] lg:hidden">
+        <button onClick={toggleSidebar} className="bg-none border-none text-white cursor-pointer">
           <Menu size={24} />
         </button>
-        <h1 style={{ marginLeft: '1rem', fontSize: '1.2rem', color: 'var(--color-primary)' }}>Ironwarg Protocol</h1>
+        <h1 className="ml-4 text-[1.2rem] text-[var(--color-primary)]">Ironwarg Protocol</h1>
       </div>
 
       <Sidebar
@@ -42,14 +30,8 @@ function App() {
         }}
       />
 
-      <main style={{
-        flex: 1,
-        padding: '1rem',
-        marginTop: '60px',
-        marginLeft: isSidebarOpen ? '0' : '0', // Adjust based on responsive needs
-        width: '100%'
-      }}>
-        <div className="container">
+      <main className="flex-1 p-4 mt-[60px] w-full lg:ml-0 lg:mt-0">
+        <div className="max-w-[800px] mx-auto px-4">
           <WorkoutView workoutId={currentWorkoutId} data={WORKOUT_DATA} />
         </div>
       </main>
