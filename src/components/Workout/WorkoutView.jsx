@@ -3,7 +3,16 @@ import ExerciseCard from './ExerciseCard';
 import RestOverlay from './RestOverlay';
 import { Trophy, ArrowLeft, Flame } from 'lucide-react';
 
-const WorkoutView = ({ workoutId, data }) => {
+const WorkoutView = ({ workoutId, data, onBack }) => {
+    // Safety check: ensure workout exists
+    if (!data?.workouts?.[workoutId]) {
+        return (
+            <div className="min-h-screen flex items-center justify-center text-[var(--color-text-muted)]">
+                Workout not found. Please select a valid workout.
+            </div>
+        );
+    }
+
     const exercises = data.workouts[workoutId];
     const title = workoutId.replace(/_/g, ' ');
 
@@ -94,7 +103,7 @@ const WorkoutView = ({ workoutId, data }) => {
 
             <header className="mb-10 mt-6">
                 <div className="flex items-center gap-4 mb-6">
-                    <button className="p-2 rounded-full hover:bg-white/5 transition-colors text-[var(--color-text-muted)] hover:text-white">
+                    <button onClick={onBack} className="p-2 rounded-full hover:bg-white/5 transition-colors text-[var(--color-text-muted)] hover:text-white">
                         <ArrowLeft size={20} />
                     </button>
                     <span className="text-[var(--color-primary)] font-medium tracking-wider text-xs uppercase bg-[rgba(225,29,72,0.1)] px-3 py-1 rounded-full">

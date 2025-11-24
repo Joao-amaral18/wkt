@@ -16,7 +16,7 @@ export const WORKOUT_DATA = {
     },
 
     "workouts": {
-        "A1_Upper1_PeitoOmbros": [
+        "A1_Upper1": [
             "Supino reto livre – 3×4-6 (1-2 RIR todas)",
             "Crucifixo máquina – 3×8-10 (falha técnica todas)",
             "Desenvolvimento máquina ou livre – 3×7-10 (falha técnica todas)",
@@ -34,7 +34,7 @@ export const WORKOUT_DATA = {
             "Mesa flexora – 2×8-10 (falha técnica)"
         ],
 
-        "A2_Upper2_PeitoOmbros": [
+        "A2_Upper2": [
             "Supino inclinado smith – 3×5-9 (falha técnica 1ª, falha total 2ª e 3ª)",
             "Crucifixo máquina – 3×5-9 (falha técnica 1ª, falha total 2ª e 3ª)",
             "Desenvolvimento smith – 3×5-9 (falha técnica 1ª, falha total 2ª e 3ª)",
