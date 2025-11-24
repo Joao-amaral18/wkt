@@ -64,7 +64,17 @@ const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComple
 
     const handleCheckSet = async (setIndex) => {
         const set = sets[setIndex];
-        if (set.isCompleted) return;
+
+        // Toggle Logic
+        if (set.isCompleted) {
+            // Undo: Set isCompleted to false
+            // Note: This does not delete the record from DB to avoid complexity with IDs for now.
+            // It just allows the user to re-edit.
+            setSets(prev => prev.map((s, i) =>
+                i === setIndex ? { ...s, isCompleted: false } : s
+            ));
+            return;
+        }
 
         // Save to DB
         try {
@@ -104,8 +114,8 @@ const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComple
 
     return (
         <div className={`mb-8 transition-all duration-500 ease-out ${isActive
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-40 translate-y-2 pointer-events-none grayscale'
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-40 translate-y-2 pointer-events-none grayscale'
             }`}>
             <div className="mb-4 pl-2">
                 <div className="flex items-baseline justify-between mb-1">
@@ -126,8 +136,8 @@ const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComple
             <div className="flex flex-col gap-3">
                 {sets.map((set, i) => (
                     <div key={i} className={`group flex items-center gap-4 p-3 rounded-xl transition-all duration-300 ${set.isCompleted
-                            ? 'bg-white/5'
-                            : 'bg-[var(--color-surface)] border border-[var(--color-border)]'
+                        ? 'bg-white/5'
+                        : 'bg-[var(--color-surface)] border border-[var(--color-border)]'
                         }`}>
                         <span className={`w-6 h-6 flex items-center justify-center text-xs font-bold rounded-full transition-colors ${set.isCompleted ? 'text-green-500 bg-green-500/10' : 'text-[var(--color-text-muted)] bg-white/5'
                             }`}>
@@ -143,8 +153,8 @@ const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComple
                                     step="0.5"
                                     placeholder={set.prevWeight || '-'}
                                     className={`w-full bg-transparent border-none p-0 text-lg font-medium focus:ring-0 placeholder:text-[var(--color-text-muted)]/30 ${(set.prevWeight && parseFloat(set.weight) > set.prevWeight)
-                                            ? 'text-green-400'
-                                            : 'text-white'
+                                        ? 'text-green-400'
+                                        : 'text-white'
                                         }`}
                                     value={set.weight}
                                     onChange={(e) => handleWeightChange(i, e.target.value)}
@@ -164,8 +174,8 @@ const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComple
                                     inputMode="numeric"
                                     placeholder={set.prevReps || '-'}
                                     className={`w-full bg-transparent border-none p-0 text-lg font-medium focus:ring-0 placeholder:text-[var(--color-text-muted)]/30 ${(set.prevReps && parseInt(set.reps) > set.prevReps)
-                                            ? 'text-green-400'
-                                            : 'text-white'
+                                        ? 'text-green-400'
+                                        : 'text-white'
                                         }`}
                                     value={set.reps || ''}
                                     onChange={(e) => handleRepsChange(i, e.target.value)}
@@ -179,13 +189,13 @@ const ExerciseCard = ({ exerciseString, index, isActive, onComplete, onSetComple
 
                         <button
                             className={`w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 ${set.isCompleted
-                                    ? 'bg-green-500 text-white shadow-[0_0_15px_rgba(34,197,94,0.4)]'
-                                    : 'bg-white/5 text-[var(--color-text-muted)] hover:bg-white/10 hover:text-white'
+                                ? 'bg-green-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.4)]'
+                                : 'bg-white/5 text-[var(--color-text-muted)] hover:bg-white/10 hover:text-white'
                                 }`}
                             onClick={() => handleCheckSet(i)}
-                            disabled={set.isCompleted || !set.weight || !set.reps}
+                            disabled={!set.isCompleted && (!set.weight || !set.reps)}
                         >
-                            <CheckCircle size={20} className={set.isCompleted ? 'fill-current' : ''} />
+                            <CheckCircle size={20} className={set.isCompleted ? 'stroke-[3px]' : ''} />
                         </button>
                     </div>
                 ))}
