@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import ExerciseCard from './ExerciseCard';
-import RestOverlay from './RestOverlay';
 import { Trophy, ArrowLeft, Flame } from 'lucide-react';
 
 const WorkoutView = ({ workoutId, data, onBack }) => {
@@ -18,29 +17,7 @@ const WorkoutView = ({ workoutId, data, onBack }) => {
 
     const [activeExerciseIndex, setActiveExerciseIndex] = useState(0);
     const [completedExercises, setCompletedExercises] = useState([]);
-
-    // Timer State
-    const [isTimerRunning, setIsTimerRunning] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(90);
     const [showSummary, setShowSummary] = useState(false);
-
-    useEffect(() => {
-        let interval;
-        if (isTimerRunning && timeLeft > 0) {
-            interval = setInterval(() => {
-                setTimeLeft((prev) => prev - 1);
-            }, 1000);
-        } else if (timeLeft === 0) {
-            setIsTimerRunning(false);
-            // Play sound?
-        }
-        return () => clearInterval(interval);
-    }, [isTimerRunning, timeLeft]);
-
-    const handleSetComplete = () => {
-        setTimeLeft(90);
-        setIsTimerRunning(true);
-    };
 
     const handleExerciseComplete = (index) => {
         if (!completedExercises.includes(index)) {
@@ -139,7 +116,6 @@ const WorkoutView = ({ workoutId, data, onBack }) => {
                             index={index}
                             isActive={index === activeExerciseIndex}
                             onComplete={() => handleExerciseComplete(index)}
-                            onSetComplete={handleSetComplete}
                         />
                     ))}
                 </div>
@@ -155,13 +131,6 @@ const WorkoutView = ({ workoutId, data, onBack }) => {
                     </div>
                 )}
             </section>
-
-            <RestOverlay
-                isVisible={isTimerRunning}
-                timeLeft={timeLeft}
-                onAdd30s={() => setTimeLeft(prev => prev + 30)}
-                onSkip={() => setIsTimerRunning(false)}
-            />
         </div>
     );
 };

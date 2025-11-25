@@ -15,16 +15,16 @@ export const WORKOUT_DATA = {
 
     "workouts": {
         "A1_Upper1": [
-            "Supino reto barra livre – 3×5-7 (1-2 RIR todas → foco técnica perfeita e progressão de carga)",
-            "Supino inclinado 30-40° halteres – 3×8-10 (0 RIR na última + 1–2 partials no stretch)",
-            "Crucifixo inclinado máquina ou polia baixa – 3×10-12 (falha técnica + lengthened focus)",
-            "Desenvolvimento militar sentado (smith ou máquina) – 3×7-10 (0 RIR na última)",
-            "Elevação lateral polia unilateral (cabo na mão oposta) – 3×10-12 + 6-8 partials finais",
+            "Supino reto – 3×5-7 (1-2 RIR todas → foco técnica perfeita e progressão de carga)",
+            "Supino inclinado 30-40° es – 3×8-10 (0 RIR na última + 1–2 partials no stretch)",
+            "Crucifixo inclinado – 3×10-12 (falha técnica + lengthened focus)",
+            "Desenvolvimento militar sentado – 3×7-10 (0 RIR na última)",
+            "Elevação lateral unilateral (cabo na mão oposta) – 3×10-12 + 6-8 partials finais",
             "Face pull ou reverse pec deck (rear delts) – 3×12-15 (0 RIR + contração 2 seg)",
             "Remada curvada – 2×6-8",
             "Pulldown pronado (lats) – 2×8-12 (0 RIR na última)",
-            "Tríceps barrinha polia – 3×10-12 (falha total na última)",
-            "Rosca direta polia – 3×10-12 (falha total na última)"
+            "Tríceps barrinha – 3×10-12 (falha total na última)",
+            "Rosca direta – 3×10-12 (falha total na última)"
         ],
         "B1_Lower1": [
             "Agachamento livre – 3×8-10",
@@ -33,13 +33,13 @@ export const WORKOUT_DATA = {
             "Mesa flexora deitado – 3×10-12 (0 RIR na última)"
         ],
         "A2_Upper2": [
-            "Supino inclinado smith ou máquina – 3×8-12 → última série Myo-Reps (falha + 3-5 respirações × 4-6 mini-sets)",
-            "Crucifixo máquina– 3×10-15 (0 RIR)",
-            "Desenvolvimento halteres sentado – 3×10-12 + 1 rest-pause set na última",
-            "Elevação lateral halter (lean-away) – 4×12-15 (última full failure + partials 20+)",
-            "Rear delt fly máquina ou face pull – 3×15-20",
-            "Remada unilateral polia – 3×10-12/perna",
-            "Tríceps testa polia - 3×12-15 cada (ou giant set)",
+            "Supino inclinado – 3×8-12 → última série Myo-Reps (falha + 3-5 respirações × 4-6 mini-sets)",
+            "Crucifixo – 3×10-15 (0 RIR)",
+            "Desenvolvimento sentado – 3×10-12 + 1 rest-pause set na última",
+            "Elevação lateral – 4×12-15 (última full failure + partials 20+)",
+            "Rear delt fly – 3×15-20",
+            "Remada unilateral – 3×10-12/perna",
+            "Tríceps testa - 3×12-15 cada (ou giant set)",
             "Rosca bayesian cabo – 3×12-15 cada (ou giant set)"
         ],
         "B2_Lower2": [
